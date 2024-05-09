@@ -1,17 +1,18 @@
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
 import { Repository } from 'typeorm'
 import { CreateUserDto } from './dto/create-user.dto'
 import * as bcrypt from 'bcrypt'
 import { SignInUserDto } from './dto/signin-user.dto'
+import { AuthService } from 'src/auth/auth.service'
 
 @Injectable()
 export class UserService {
-	private readonly logger = new Logger(UserService.name)
 	constructor(
 		@InjectRepository(User)
-		private readonly userRepository: Repository<User>
+		private readonly userRepository: Repository<User>,
+		private readonly authService: AuthService
 	) {}
 
 	public async signUp(body: CreateUserDto) {
@@ -31,7 +32,9 @@ export class UserService {
 			password: hashedPassword
 		})
 
-		this.userRepository.save(newUser)
+		await this.userRepository.save(newUser)
+
+		await this.authService.generateRefreshToken(newUser)
 	}
 
 	public async signIn(body: SignInUserDto) {
@@ -49,6 +52,9 @@ export class UserService {
 			throw new HttpException('비밀번호가 다릅니다.', HttpStatus.UNAUTHORIZED)
 		}
 
-		console.log(comparePassword)
+		return {
+			accessToken: await this.authService.generateAccessToken(user),
+			refreshToken: await this.authService.generateRefreshToken(user)
+		}
 	}
 }

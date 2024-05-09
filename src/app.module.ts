@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { UserModule } from './user/user.module'
 import { User } from './user/entities/user.entity'
 import { AuthModule } from './auth/auth.module'
+import { RefreshToken } from './auth/entities/refreshToken.entity'
 
 @Module({
 	imports: [
@@ -20,7 +21,7 @@ import { AuthModule } from './auth/auth.module'
 			username: process.env.DB_ID,
 			password: process.env.DB_PASSWORD,
 			database: process.env.DB_NAME,
-			entities: [User],
+			entities: [User, RefreshToken],
 			synchronize: true,
 			logging: true
 		}),

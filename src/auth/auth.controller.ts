@@ -11,7 +11,8 @@ export class AuthController {
 	@Get('login')
 	@Public()
 	signIn(@Body() signInDto: SignInUserDto) {
-		return this.authService.signIn(signInDto.email, signInDto.password)
+		console.log(signInDto)
+		// return this.authService.signIn(signInDto.email, signInDto.password)
 	}
 
 	@Get('profile')

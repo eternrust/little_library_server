@@ -25,10 +25,10 @@ export class AuthService {
 	async generateRefreshToken(user: User): Promise<string> {
 		const payload = { id: user.id }
 		const token: RefreshToken | undefined = await this.refreshTokenReposiory.findOne({
-			where: { userId: user.id }
+			where: { userId: user.id, isBlocked: false }
 		})
 
-		if (token && !token.isBlocked) {
+		if (token && token.expiredAt > new Date()) {
 			return token.refreshToken
 		} else {
 			const refreshToken = await this.jwtService.signAsync(payload, {
@@ -38,8 +38,13 @@ export class AuthService {
 			const refresh = this.refreshTokenReposiory.create({
 				userId: user.id,
 				refreshToken,
-				expiredAt: new Date(Date.now())
+				expiredAt: new Date(Date.now() + this.configService.get<string>('JWT_ACCESS_EXPIRATION_TIME_SECOND'))
 			})
+			if (token && token.expiredAt < new Date()) {
+				this.refreshTokenReposiory.update(token.id, {
+					isBlocked: true
+				})
+			}
 			this.refreshTokenReposiory.save(refresh)
 			return refreshToken
 		}

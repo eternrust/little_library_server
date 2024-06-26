@@ -1143,18 +1143,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/typeorm@npm:^10.0.2":
-  version: 10.0.2
-  resolution: "@nestjs/typeorm@npm:10.0.2"
+"@nestjs/typeorm@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "@nestjs/typeorm@npm:9.0.1"
   dependencies:
-    uuid: 9.0.1
+    uuid: 8.3.2
   peerDependencies:
-    "@nestjs/common": ^8.0.0 || ^9.0.0 || ^10.0.0
-    "@nestjs/core": ^8.0.0 || ^9.0.0 || ^10.0.0
-    reflect-metadata: ^0.1.13 || ^0.2.0
+    "@nestjs/common": ^8.0.0 || ^9.0.0
+    "@nestjs/core": ^8.0.0 || ^9.0.0
+    reflect-metadata: ^0.1.13
     rxjs: ^7.2.0
     typeorm: ^0.3.0
-  checksum: 391662a69f48337e71f9e42f4c9d421a7059911cf15c92fa40cbd81bdbc467b917c0f97702035e2e69fac30f3e12460e48f763c2114809c231c7de0ab441e2d8
+  checksum: fbf8d28405331bffa7bf224664d99078c0b7bf55a77007f79ca141a94fcf812dbc5ac40baacff370626b15f6e037bb8d60e6fee977c798fbb3f6b080c5d5b3d9
   languageName: node
   linkType: hard
 
@@ -6055,9 +6055,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mysql2@npm:^3.9.2":
-  version: 3.9.7
-  resolution: "mysql2@npm:3.9.7"
+"mysql2@npm:^3.2.0":
+  version: 3.10.1
+  resolution: "mysql2@npm:3.10.1"
   dependencies:
     denque: ^2.1.0
     generate-function: ^2.3.1
@@ -6067,7 +6067,7 @@ __metadata:
     named-placeholders: ^1.1.3
     seq-queue: ^0.0.5
     sqlstring: ^2.3.2
-  checksum: 535261d076f840f0966788b3f33a5ff7872e5da321240c2359be5c9e7ec19197ed5f6e01f0bc7beae06dd291d03eb2bde00f474461a578debcb85fcd98e347d3
+  checksum: 293e1a76bfdbde146285ee7028336da7693b5dfb507a7c264216fdb3fe2088ba0f5d5a45a0a9e7c4de4f39c3f44edbe890fb05b28299d6c731fc2e4a281836e3
   languageName: node
   linkType: hard
 
@@ -7150,7 +7150,7 @@ __metadata:
     "@nestjs/schematics": ^10.0.0
     "@nestjs/swagger": ^7.3.1
     "@nestjs/testing": ^10.0.0
-    "@nestjs/typeorm": ^10.0.2
+    "@nestjs/typeorm": ^9.0.1
     "@types/bcrypt": ^5.0.2
     "@types/express": ^4.17.17
     "@types/jest": ^29.5.2
@@ -7167,7 +7167,7 @@ __metadata:
     eslint-config-prettier: ^9.0.0
     eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
-    mysql2: ^3.9.2
+    mysql2: ^3.2.0
     passport: ^0.7.0
     passport-jwt: ^4.0.1
     passport-local: ^1.0.0
@@ -7182,7 +7182,7 @@ __metadata:
     ts-loader: ^9.4.3
     ts-node: ^10.9.1
     tsconfig-paths: ^4.2.0
-    typeorm: ^0.3.20
+    typeorm: ^0.3.12
     typescript: ^5.1.3
   languageName: unknown
   linkType: soft
@@ -8038,7 +8038,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typeorm@npm:^0.3.20":
+"typeorm@npm:^0.3.12":
   version: 0.3.20
   resolution: "typeorm@npm:0.3.20"
   dependencies:
@@ -8140,17 +8140,17 @@ __metadata:
 
 "typescript@patch:typescript@5.3.3#~builtin<compat/typescript>":
   version: 5.3.3
-  resolution: "typescript@patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=29ae49"
+  resolution: "typescript@patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=e012d7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: f61375590b3162599f0f0d5b8737877ac0a7bc52761dbb585d67e7b8753a3a4c42d9a554c4cc929f591ffcf3a2b0602f65ae3ce74714fd5652623a816862b610
+  checksum: 4e604a9e107ce0c23b16a2f8d79d0531d4d8fe9ebbb7a8c395c66998c39892f0e0a071ef0b0d4e66420a8ec2b8d6cfd9cdb29ba24f25b37cba072e9282376df9
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^5.1.3#~builtin<compat/typescript>":
   version: 5.4.5
-  resolution: "typescript@patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=29ae49"
+  resolution: "typescript@patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=e012d7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -8258,6 +8258,15 @@ __metadata:
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
   checksum: c81095493225ecfc28add49c106ca4f09cdf56bc66731aa8dabc2edbbccb1e1bfe2de6a115e5c6a380d3ea166d1636410b62ef216bb07b3feb1cfde1d95d5080
+  languageName: node
+  linkType: hard
+
+"uuid@npm:8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
 

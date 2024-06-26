@@ -7,6 +7,8 @@ import { UserModule } from './user/user.module'
 import { User } from './user/entities/user.entity'
 import { AuthModule } from './auth/auth.module'
 import { RefreshToken } from './auth/entities/refreshToken.entity'
+import { CustomModule } from './custom/custom.module'
+import { Custom } from './custom/entities/custom.entity'
 
 @Module({
 	imports: [
@@ -21,12 +23,13 @@ import { RefreshToken } from './auth/entities/refreshToken.entity'
 			username: process.env.DB_ID,
 			password: process.env.DB_PASSWORD,
 			database: process.env.DB_NAME,
-			entities: [User, RefreshToken],
+			entities: [User, RefreshToken, Custom],
 			synchronize: true,
 			logging: true
 		}),
 		UserModule,
-		AuthModule
+		AuthModule,
+		CustomModule
 	],
 	controllers: [AppController],
 	providers: [AppService]

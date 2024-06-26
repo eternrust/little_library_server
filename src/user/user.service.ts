@@ -6,6 +6,8 @@ import { CreateUserDto } from './dto/create-user.dto'
 import * as bcrypt from 'bcrypt'
 import { SignInUserDto } from './dto/signin-user.dto'
 import { AuthService } from 'src/auth/auth.service'
+import { Custom } from 'src/custom/entities/custom.entity'
+import { UpdateUserDto } from './dto'
 
 @Injectable()
 export class UserService {
@@ -13,7 +15,7 @@ export class UserService {
 		@InjectRepository(User)
 		private readonly userRepository: Repository<User>,
 		private readonly authService: AuthService
-	) {}
+	) { }
 
 	public async signUp(body: CreateUserDto) {
 		const { name, email, password } = body
@@ -56,5 +58,36 @@ export class UserService {
 			accessToken: await this.authService.generateAccessToken(user),
 			refreshToken: await this.authService.generateRefreshToken(user)
 		}
+	}
+
+	public async find({ id: userId }: { id: number, name: string }, id: number) {
+		// const user: User | undefined = await this.userRepository.findOne({ where: { id } })
+		const user = await this.userRepository
+			.createQueryBuilder('user')
+			.leftJoinAndSelect('user.bookmark', 'bookmark')
+			.where('user.id=:id', { id })
+			.getOneOrFail()
+
+		if (!user) {
+			throw new HttpException('해당 id의 유저가 없습니다.', HttpStatus.NOT_FOUND)
+		}
+
+		for (const bookmark of user.bookmark) {
+			bookmark['user_name'] = (await this.userRepository.findOne({ where: { id: bookmark.userId } })).name
+		}
+
+		user['isMe'] = userId === user.id
+		user['password'] = undefined
+		return user
+	}
+
+	public async quit(user: { id: number; name: string }) {
+		await this.find(user, user.id)
+		await this.userRepository.delete(user.id)
+	}
+
+	public async change(user: { id: number; name: string }, updateUserDto: UpdateUserDto) {
+		await this.find(user, user.id)
+		await this.userRepository.update(user.id, updateUserDto)
 	}
 }
